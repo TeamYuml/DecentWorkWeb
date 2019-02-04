@@ -19,20 +19,19 @@
         <div class="col-md-12">
             <div class="main-form">
                 <div class="login-form">
-                    <h1>{% trans "Logowanie" %}</h1>
+                    <h1>{% trans "Sign In" %}</h1>
                     <h2>DecentWork</h2>
                     {% get_providers as socialaccount_providers %}
                     
                     {% if socialaccount_providers %}
-                    
-                        <p>Jeżeli nie masz konta <a href="{{ signup_url }}">zarejestruj się</a> lub zaloguj się z 
+                        {% blocktrans %}
+                        <p>If you don't have account <a href="{{ signup_url }}">sign up</a> or sign in with{% endblocktrans %} 
                             {% include "socialaccount/snippets/provider_list.html" with process="login" %}</p>
                     
-                    {% include "socialaccount/snippets/login_extra.html" %}
-                    
+                        {% include "socialaccount/snippets/login_extra.html" %}
                     {% else %}
-                        <p>{% blocktrans %}Jeżeli nie masz konta
-                        <a href="{{ signup_url }}">zarejestruj się</a>{% endblocktrans %}</p>
+                        <p>{% blocktrans %}If you don't have aacount
+                        <a href="{{ signup_url }}">sign up</a>{% endblocktrans %}</p>
                     {% endif %}
                     
                     <form class="login" method="POST" action="{% url 'account_login' %}">
@@ -40,29 +39,29 @@
                         {{ form.non_field_errors }}
                         <div class="fieldWrapper">
                             {{ form.login.errors }}
-                            <label for="{{ form.login.id_for_label }}">E-mail: </label>
-                            <input class="input_data" type="email" name="login" placeholder="Adres e-mail"
+                            <label for="{{ form.login.id_for_label }}">{% trans 'E-mail:' %}</label>
+                            <input class="input_data" type="email" name="login" placeholder="{% trans 'E-mail address' %}"
                                 autofocus="autofocus" required="" id="id_login">
                         </div>
                         <div class="fieldWrapper">
                             {{ form.password.errors }}
-                            <label for="{{ form.password.id_for_label }}">Hasło: </label>
-                            <input class="input_data" type="password" name="password" placeholder="Hasło"
+                            <label for="{{ form.password.id_for_label }}">{% trans 'Password:' %}</label>
+                            <input class="input_data" type="password" name="password" placeholder="{% trans 'Password' %}"
                                 required="" id="id_password">
                         </div>
                         <div class="fieldWrapper">
                             <div>
                                 {{ form.remember.errors }}
-                                <label class="remember_label"for="{{ form.remember.id_for_laber }}">Zapamiętaj mnie</label>
+                                <label class="remember_label"for="{{ form.remember.id_for_laber }}">{% trans 'Remember me' %}</label>
                                 {{ form.remember }}
                             </div>
                         </div>
                         {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
-                        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Zapomniałeś hasła?" %}</a>
+                        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
                         <div class="action_btn">
-                            <button class="primaryAction" type="submit">{% trans "Zaloguj" %}</button>
+                            <button class="primaryAction" type="submit">{% trans "Sign in" %}</button>
                         </div>
                     </form>
                 </div>

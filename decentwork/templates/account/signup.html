@@ -6,7 +6,7 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block head_title %}{% trans "Register" %}{% endblock %}
 
 {% block extrastyles %}
 {% get_css 'app' %}
@@ -19,36 +19,36 @@
         <div class="col-md-12">
             <div class="main-form">
                 <div class="login-form">
-                    <h1>{% trans "Rejestracja" %}</h1>
+                    <h1>{% trans "Register" %}</h1>
 
-                    <p>{% blocktrans %}Posiadasz już konto? <a href="{{ login_url }}">Zaloguj się</a>.{% endblocktrans %}</p>
+                    <p>{% blocktrans %}Do you have an account? <a href="{{ login_url }}">Sign in</a>.{% endblocktrans %}</p>
                     <div class="fieldWrapper"></div>
                     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                       {% csrf_token %}
                       {{ form.non_field_errors }}
                       <div class="fieldWrapper">
                           {{ form.signup.errors }}
-                          <label for="{{ form.signup.id_for_label }}">E-mail: </label>
-                          <input class="input_data" type="email" name="login" placeholder="Adres e-mail"
+                          <label for="{{ form.signup.id_for_label }}">{% trans 'E-mail:' %}</label>
+                          <input class="input_data" type="email" name="login" placeholder="{% trans 'E-mail address' %}"
                               autofocus="autofocus" required="" id="id_login">
                       </div>
                       <div class="fieldWrapper">
                           {{ form.password.errors }}
-                          <label for="{{ form.password.id_for_label }}">Hasło: </label>
-                          <input class="input_data" type="password" name="password" placeholder="Hasło"
+                          <label for="{{ form.password.id_for_label }}">{% trans 'Password:' %}</label>
+                          <input class="input_data" type="password" name="password" placeholder="{% trans 'Password' %}"
                               required="" id="id_password">
                       </div>
                       <div class="fieldWrapper">
                           {{ form.password.errors }}
-                          <label for="{{ form.re_password.id_for_label }}">Powtórz hasło: </label>
-                          <input class="input_data" type="password" name="re_password" placeholder="Powtórz hasło"
+                          <label for="{{ form.re_password.id_for_label }}">{% trans 'Repeat password:' %}</label>
+                          <input class="input_data" type="password" name="re_password" placeholder="{% trans 'Repeat password' %}"
                               required="" id="id_re_password">
                       </div>
                       {% if redirect_field_value %}
                       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                       {% endif %}
                       <div class="action_btn">
-                          <button class="primaryAction" type="submit">{% trans "Zarejestruj" %} &raquo;</button>
+                          <button class="primaryAction" type="submit">{% trans "Register" %} &raquo;</button>
                       </div>
                     </form>
                 </div>

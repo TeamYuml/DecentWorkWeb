@@ -39,7 +39,7 @@ class UserProfileSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def rate(self, request, pk=None):
         if pk is None:
-            return Response('No user id passed', status=status.HTTP_400_BAD_REQUEST)
+            return Response(_('No user id passed'), status=status.HTTP_400_BAD_REQUEST)
         
         rating = request.data.get('rating', None)
 
@@ -54,7 +54,7 @@ class UserProfileSet(viewsets.ModelViewSet):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response('No rating passed', status=status.HTTP_400_BAD_REQUEST)
+        return Response(_('No rating passed'), status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProfilesWithProfession(mixins.ListModelMixin, viewsets.GenericViewSet):

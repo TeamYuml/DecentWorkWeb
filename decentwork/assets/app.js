@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { store } from './store';
 import { router } from './router';
+import { i18n } from './i18n';
 import './scss/main.scss';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -22,5 +23,6 @@ var app = new Vue({
     el: '#app',
     store,
     router,
+    i18n,
     render: h => h(App)
-});
+}).$mount('#apps');

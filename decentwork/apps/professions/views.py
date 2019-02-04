@@ -21,9 +21,9 @@ class ProfessionLiveSearch(APIView):
                 serializer = ProfessionSerializer(professions, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
-            return Response('No cities with this query', status=status.HTTP_400_BAD_REQUEST)
+            return Response(_('No cities with this query'), status=status.HTTP_400_BAD_REQUEST)
 
-        return Response('No query string', status=status.HTTP_400_BAD_REQUEST)
+        return Response(_('No query string'), status=status.HTTP_400_BAD_REQUEST)
 
 class ProfessionList(generics.ListAPIView):
     queryset = Profession.objects.all()

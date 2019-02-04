@@ -54,3 +54,9 @@ Installing other fixtures needed for application to work
 ```
 ./manage.py loaddata cities professions users notices uprofiles
 ```
+
+## Translations
+To compile translations write
+```
+./manage.py compilemessages
+```

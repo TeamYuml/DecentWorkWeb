@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-26 12:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: decentwork/apps/cities/views.py:25 decentwork/apps/professions/views.py:24
+msgid "No cities with this query"
+msgstr "Brak miast o podanej nazwie"
+
+#: decentwork/apps/cities/views.py:27
+msgid "No query string was entered"
+msgstr "Brak nazwy"
+
+#: decentwork/apps/common/views.py:30
+msgid "No password or email"
+msgstr "Brak hasła lub adresu email"
+
+#: decentwork/apps/common/views.py:49
+msgid "No authorization"
+msgstr "Brak autoryzacji"
+
+#: decentwork/apps/common/views.py:70
+msgid "Token is wrong"
+msgstr "Token jest zły"
+
+#: decentwork/apps/common/views.py:96
+msgid "No token"
+msgstr "Brak tokenu"
+
+#: decentwork/apps/notices/views.py:47
+msgid "No id notice passed"
+msgstr "Brak id ogłoszenia"
+
+#: decentwork/apps/notices/views.py:96 decentwork/apps/notices/views.py:111
+msgid "No notice passed"
+msgstr "Brak id ogłoszenia"
+
+#: decentwork/apps/professions/views.py:26
+msgid "No query string"
+msgstr "Brak nazwy profesji"
+
+#: decentwork/apps/profiles/views.py:42
+msgid "No user id passed"
+msgstr "Brak id użytkownika"
+
+#: decentwork/apps/profiles/views.py:57
+msgid "No rating passed"
+msgstr "Brak Twojego głosu"
+
+#: decentwork/settings/base.py:130
+msgid "English"
+msgstr "Angielski"
+
+#: decentwork/settings/base.py:131
+msgid "Polish"
+msgstr "Polski"
+
+#: decentwork/templates/account/login.html:8
+#: decentwork/templates/account/login.html:22
+msgid "Sign In"
+msgstr "Zaloguj"
+
+#: decentwork/templates/account/login.html:27
+#, python-format
+msgid ""
+"\n"
+"                        <p>If you don't have account <a href=\"%(signup_url)s"
+"\">sign up</a> or sign in with"
+msgstr ""
+"\n"
+"                        <p>Jeżeli nie masz konta <a href=\"%(signup_url)s"
+"\">zarejestruj sie</a> lub zaloguj z"
+
+#: decentwork/templates/account/login.html:33
+#, python-format
+msgid ""
+"If you don't have aacount\n"
+"                        <a href=\"%(signup_url)s\">sign up</a>"
+msgstr ""
+"Jeżeli nie masz konta\n"
+"                        <a href=\"%(signup_url)s\">zarejestruj się</a>"
+
+#: decentwork/templates/account/login.html:42
+#: decentwork/templates/account/password_reset.html:36
+#: decentwork/templates/account/signup.html:31
+msgid "E-mail:"
+msgstr "E-mail:"
+
+#: decentwork/templates/account/login.html:43
+#: decentwork/templates/account/password_reset.html:37
+#: decentwork/templates/account/signup.html:32
+msgid "E-mail address"
+msgstr "Adres e-mail"
+
+#: decentwork/templates/account/login.html:48
+#: decentwork/templates/account/signup.html:37
+msgid "Password:"
+msgstr "Hasło:"
+
+#: decentwork/templates/account/login.html:49
+#: decentwork/templates/account/signup.html:38
+msgid "Password"
+msgstr "Hasło"
+
+#: decentwork/templates/account/login.html:55
+msgid "Remember me"
+msgstr "Zapamiętaj mnie"
+
+#: decentwork/templates/account/login.html:62
+#: decentwork/templates/account/password_reset.html:9
+msgid "Forgot password?"
+msgstr "Zapomniałeś/aś hasła?"
+
+#: decentwork/templates/account/login.html:64
+msgid "Sign in"
+msgstr "Zaloguj"
+
+#: decentwork/templates/account/password_reset.html:25
+msgid "Reset your password"
+msgstr "Zresetuj hasło"
+
+#: decentwork/templates/account/password_reset.html:30
+msgid "Did you forget password? Enter e-mail below"
+msgstr "Zapomniałeś/aś hasła? Wpisz e-mail poniżej"
+
+#: decentwork/templates/account/password_reset.html:41
+msgid "Reset password"
+msgstr "Zresetuj hasło"
+
+#: decentwork/templates/account/signup.html:9
+#: decentwork/templates/account/signup.html:22
+#: decentwork/templates/account/signup.html:51
+msgid "Register"
+msgstr "Zarejestruj"
+
+#: decentwork/templates/account/signup.html:24
+#, python-format
+msgid "Do you have an account? <a href=\"%(login_url)s\">Sign in</a>."
+msgstr "Masz konto? <a href=\"%(login_url)s\">Zaloguj się</a>."
+
+#: decentwork/templates/account/signup.html:43
+msgid "Repeat password:"
+msgstr "Powtórz hasło:"
+
+#: decentwork/templates/account/signup.html:44
+msgid "Repeat password"
+msgstr "Powtórz hasło"

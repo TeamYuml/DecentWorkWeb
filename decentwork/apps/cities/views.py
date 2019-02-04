@@ -1,3 +1,4 @@
+from django.utils.translation import gettext as _
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -21,9 +22,9 @@ class CityLiveSearch(APIView):
                 serializer = CitySerializer(cities, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
-            return Response('No cities with this query', status=status.HTTP_400_BAD_REQUEST)
+            return Response(_('No cities with this query'), status=status.HTTP_400_BAD_REQUEST)
 
-        return Response('No query string', status=status.HTTP_400_BAD_REQUEST)
+        return Response(_('No query string was entered'), status=status.HTTP_400_BAD_REQUEST)
 
 
 class CityList(generics.ListAPIView):

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 notice">
-                <h1>Dodaj ogłoszenie</h1>
+                <h1>{{ $t("messages.addNotice") }}</h1>
                 <form @submit.prevent>
                     <button class="primaryAction" type="submit" @click="addNotice" name="action">Dodaj ogłoszenie</button>
                     <br>

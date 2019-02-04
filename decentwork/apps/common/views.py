@@ -5,6 +5,7 @@ from allauth.socialaccount.models import SocialAccount
 from django.conf import settings
 from django.contrib.auth import authenticate, password_validation
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
 from google.auth.transport import requests
 from google.oauth2 import id_token
 from rest_framework import authentication, status, viewsets
@@ -26,7 +27,7 @@ class UserApiLogin(APIView):
         password = request.data.get('password', None)
 
         if not password or not email:
-            return Response("Brak hasła lub email.", status=status.HTTP_400_BAD_REQUEST)
+            return Response(_("No password or email"), status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.filter(
             email=email).first()
@@ -45,7 +46,7 @@ class UserApiLogin(APIView):
                 else:
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response("Brak autoryzacji", status=status.HTTP_401_UNAUTHORIZED)
+        return Response(_("No authorization"), status=status.HTTP_401_UNAUTHORIZED)
 
 
 class TokenSignIn(APIView):
@@ -66,7 +67,7 @@ class TokenSignIn(APIView):
             idinfo = id_token.verify_oauth2_token(token, requests.Request(), settings.CLIENT_ID)
 
             if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-                return Response("Token jest zły", status=status.HTTP_401_UNAUTHORIZED)
+                return Response(_("Token is wrong"), status=status.HTTP_401_UNAUTHORIZED)
 
             email = idinfo['email']
             user = User.objects.filter(email=email).first()
@@ -92,7 +93,7 @@ class TokenSignIn(APIView):
             else:
                 return self._prepare_response(user)
 
-        return Response("Brak tokenu", status=status.HTTP_400_BAD_REQUEST)
+        return Response(_("No token"), status=status.HTTP_400_BAD_REQUEST)
 
     def _prepare_response(self, user: User) -> Optional[Dict[str, Any]]:
         """Serializes user data and prepares response for token sign in.

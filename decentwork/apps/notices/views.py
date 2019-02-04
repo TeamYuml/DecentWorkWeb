@@ -1,3 +1,4 @@
+from django.utils.translation import gettext as _
 from rest_framework import authentication, generics, mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ParseError
@@ -43,7 +44,7 @@ class NoticesViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def set_notice_done(self, request, pk=None):
         if pk is None:
-            return Response('No id notice passed', status=status.HTTP_400_BAD_REQUEST)
+            return Response(_('No id notice passed'), status=status.HTTP_400_BAD_REQUEST)
         
         Notice.objects.filter(pk=pk, owner=request.user).update(is_done=True)
         return Response(status=status.HTTP_200_OK)
@@ -92,7 +93,7 @@ class ListAssigment(generics.ListAPIView):
         notice = self.request.query_params.get('notice', None)
 
         if notice is None:
-            raise ParseError('No notice passed')
+            raise ParseError(_('No notice passed'))
 
         return UserAssigned.objects.filter(notice=notice)
 
@@ -107,7 +108,7 @@ class CheckAssign(APIView):
         notice = self.request.query_params.get('notice', None)
 
         if notice is None:
-            return Response('No notice passed', status=status.HTTP_400_BAD_REQUEST)
+            return Response(_('No notice passed'), status=status.HTTP_400_BAD_REQUEST)
         
         assign = UserAssigned.objects.filter(user=user, notice=notice).first()
 

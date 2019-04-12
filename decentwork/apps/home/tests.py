@@ -1,19 +1,17 @@
-from django.test import TestCase, Client
-
 from decentwork.apps.common.models import User
+from decentwork.apps.factories.tests import DecentWorkTestCase
 
 
-class TestHome(TestCase):
-    fixtures = ['users']
+class TestHome(DecentWorkTestCase):
 
-    def setUp(self):
-        self.client = Client()
-        self.user = User.objects.get(pk=1)
+    def setUp(self, *args, **kwargs):
+        super().setUp(*args, **kwargs)
+        self.user = self.dw_faker.user()
 
     def test_home_without_login(self):
         """Test home when user is not logged in."""
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_home_when_user_logged(self):
         """Test status code when user is logged."""

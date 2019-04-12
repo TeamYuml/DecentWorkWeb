@@ -1,30 +1,25 @@
 from rest_framework.authtoken.models import Token
-from rest_framework.test import APIClient, APITestCase
 
 from decentwork.apps.common.models import User
+from decentwork.apps.factories.tests import DecentWorkApiTestCase
 
 
-class UserProfilesTests(APITestCase):
-    fixtures = ['users', 'cities', 'professions', 'uprofiles']
+class UserProfilesTests(DecentWorkApiTestCase):
 
-    def setUp(self):
-        self.client = APIClient()
-        self.user = User.objects.create(
-            username='lol', password='lol1234#', email='ttt@ttt.ttt')
+    def setUp(self, *args, **kwargs):
+        super().setUp(*args, **kwargs)
+        self.user = self.dw_faker.user()
 
-    def _get_credentials(self, user=None):
-        if not user:
-            token = Token.objects.get(user=self.user)
-        else:
-            token = Token.objects.get(user=user)
-
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+    def _get_credentials(self):
+        token = Token.objects.get(user=self.user)
+        self.apiclient.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
 
     def test_update_method_status_201(self):
         self._get_credentials()
         data = {'description': 'test', 'city': 'Warszawa', 'professions': 'Hydraulik',
                 'phone_numbers': '123456789'}
-        response = self.client.put('/profiles/userProfiles/1/', data)
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data)
         self.assertEqual(response.status_code, 200)
 
     def test_update_response_when_success(self):
@@ -36,7 +31,8 @@ class UserProfilesTests(APITestCase):
             'description': 'test', 'city': 'Warszawa', 'professions': ['Hydraulik'],
             'phone_numbers': ['123456789']
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.data['user']['first_name'], 'Test')
         self.assertEqual(response.data['user']['last_name'], 'Test2')
         self.assertEqual(response.data['description'], 'test')
@@ -52,7 +48,8 @@ class UserProfilesTests(APITestCase):
             'city': 'Warszawa', 'professions': ['Hydraulik'],
             'phone_numbers': ['123456789']
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_no_phone(self):
@@ -63,7 +60,8 @@ class UserProfilesTests(APITestCase):
             },
             'city': 'Warszawa', 'professions': ['Hydraulik'], 'description': 'test'
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_no_city(self):
@@ -74,7 +72,8 @@ class UserProfilesTests(APITestCase):
             },
             'professions': ['Hydraulik'], 'description': 'test'
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_no_profession(self):
@@ -85,7 +84,8 @@ class UserProfilesTests(APITestCase):
             },
             'city': 'Warszawa', 'description': 'test'
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_no_last_name(self):
@@ -96,7 +96,8 @@ class UserProfilesTests(APITestCase):
             },
             'city': 'Warszawa', 'description': 'test'
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_no_first_name(self):
@@ -107,7 +108,8 @@ class UserProfilesTests(APITestCase):
             },
             'city': 'Warszawa', 'description': 'test'
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_two_professions(self):
@@ -118,7 +120,8 @@ class UserProfilesTests(APITestCase):
             },
             'city': 'Warszawa', 'professions': ['Hydraulik', 'Elektryk'], 'description': 'test'
         }
-        response = self.client.put('/profiles/userProfiles/1/', data, format='json')
+        response = self.apiclient.put('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data, format='json')
         self.assertEqual(response.status_code, 200)
 
     def test_update_when_no_token(self):
@@ -128,32 +131,35 @@ class UserProfilesTests(APITestCase):
             },
             'city': 'Warszawa', 'description': 'test'
         }
-        response = self.client.post('/profiles/userProfiles/', data, format='json')
+        response = self.apiclient.post('/profiles/userProfiles/', data, format='json')
         self.assertEqual(response.status_code, 401)
 
     def test_list_200(self):
         """Test status of listing users profiles."""
-        response = self.client.get('/profiles/userProfiles/')
+        response = self.apiclient.get('/profiles/userProfiles/')
         self.assertEqual(response.status_code, 200)
 
     def test_retrive_one_user_profile(self):
         """Test data from retrievieng one user profile."""
-        response = self.client.get('/profiles/userProfiles/1/')
+        response = self.apiclient.get('/profiles/userProfiles/'
+            + str(self.user.id) + '/')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data['user']['id'], 1)
+        self.assertEqual(response.data['user']['id'], self.user.id)
         self.assertEqual(response.data['city'], None)
-        self.assertEqual(response.data['professions'], ['Hydraulik', 'Elektryk'])
+        self.assertEqual(response.data['professions'], [])
 
     def test_partial_update_city(self):
         """Test update city in profile."""
         data = {'city': 'Łódź'}
-        self._get_credentials(1)
-        response = self.client.patch('/profiles/userProfiles/1/', data)
+        self._get_credentials()
+        response = self.apiclient.patch('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data)
         self.assertEqual(response.data['city'], 'Łódź')
 
     def test_partial_update_professions(self):
         """Test update profile's professions."""
         data = {'professions': 'Murarz'}
-        self._get_credentials(1)
-        response = self.client.patch('/profiles/userProfiles/1/', data)
+        self._get_credentials()
+        response = self.apiclient.patch('/profiles/userProfiles/'
+            + str(self.user.id) + '/', data)
         self.assertEqual(response.data['professions'], ['Murarz'])
